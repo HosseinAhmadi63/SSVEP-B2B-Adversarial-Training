@@ -1,0 +1,152 @@
+paper:
+  title: Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG
+  doi: 10.1109/ACCESS.2025.3528770
+  year: 2025
+runtime:
+  seed: 2025
+  deterministic: true
+  device: auto
+paths:
+  data: data
+  cache: data/cache
+  results: results/runs
+  smoke: results/smoke
+  publication_source: results/publication/source/table3.csv
+  publication_generated: results/publication/generated
+preprocessing:
+  fmin: 4.0
+  fmax: 16.0
+  filter_method: fir
+  filter_phase: zero
+  fir_window: hamming
+  fir_design: firwin
+  reference: common_average
+  normalization: full_dataset_per_channel_zscore
+  normalization_epsilon: 1.0e-6
+  dtype: float32
+  reference_harmonics: 2
+  montage: standard_1020
+datasets:
+  Nakanishi2015:
+    moabb_class: Nakanishi2015
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    channels: 8
+    classes: 12
+    trials_per_class: 15
+    sessions: 1
+    sampling_rate: 256
+    duration: 4.15
+    interval: [0.15, 4.3]
+    frequencies: [9.25, 11.25, 13.25, 9.75, 11.75, 13.75, 10.25, 12.25, 14.25, 10.75, 12.75, 14.75]
+    batch_size: 8
+  Lee2019_SSVEP:
+    moabb_class: Lee2019_SSVEP
+    constructor:
+      train_run: true
+      test_run: null
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+    channels: 62
+    classes: 4
+    trials_per_class: 50
+    sessions: 2
+    sampling_rate: 1000
+    duration: 4.0
+    interval: [0.0, 4.0]
+    frequencies: [12.0, 8.57, 6.67, 5.45]
+    batch_size: 2
+split:
+  test_size: 0.2
+  stratified: true
+  pooled_subjects: true
+  pooled_sessions: true
+model:
+  conv_filters: [32, 64]
+  conv_kernel: [3, 3]
+  conv_padding: same
+  pool_size: [2, 2]
+  tcn_filters: 64
+  tcn_kernel: 3
+  tcn_dilation: 1
+  tcn_causal: true
+  tcn_residual: true
+  tcn_reduction: global_mean
+  dropout: 0.0
+training:
+  loss: cross_entropy
+  optimizer: adam
+  learning_rate: 0.001
+  weight_decay: 0.0
+  epochs: 100
+  early_stopping: false
+  clean_to_adversarial_ratio: [1, 1]
+  adversarial_examples: static_baseline_white_box
+  robust_initialization: fresh
+  num_workers: 0
+  keep_attack_cache: false
+attacks:
+  combination: independent_delta_sum
+  combined_projection: none
+  targeted: false
+  input_clipping: none
+  fgsm:
+    epsilon: 0.01
+  bim:
+    epsilon: 0.01
+    alpha: 0.001
+    iterations: 50
+    random_start: false
+  cw:
+    delta_limit: 0.01
+    c: 0.001
+    kappa: 10.0
+    iterations: 1000
+    norm: l2
+    learning_rate: 0.01
+  mim:
+    epsilon: 0.01
+    alpha: 0.001
+    momentum: 0.5
+    iterations: 50
+    random_start: false
+  pgd:
+    epsilon: 0.01
+    alpha: 0.001
+    iterations: 50
+    random_start: false
+evaluation:
+  accuracy: true
+  auc: macro_ovr
+  prediction_probabilities: true
+  timing_normalization: global_minimum_equals_100
+scenarios:
+  - [fgsm]
+  - [bim]
+  - [cw]
+  - [mim]
+  - [pgd]
+  - [fgsm, cw]
+  - [fgsm, bim]
+  - [fgsm, mim]
+  - [fgsm, pgd]
+  - [cw, bim]
+  - [cw, mim]
+  - [cw, pgd]
+  - [bim, mim]
+  - [bim, pgd]
+  - [mim, pgd]
+  - [fgsm, cw, bim]
+  - [fgsm, cw, mim]
+  - [fgsm, cw, pgd]
+  - [fgsm, bim, mim]
+  - [fgsm, bim, pgd]
+  - [fgsm, mim, pgd]
+  - [cw, bim, mim]
+  - [cw, bim, pgd]
+  - [cw, mim, pgd]
+  - [bim, mim, pgd]
+  - [fgsm, cw, bim, mim]
+  - [fgsm, cw, bim, pgd]
+  - [fgsm, cw, mim, pgd]
+  - [fgsm, bim, mim, pgd]
+  - [cw, bim, mim, pgd]
+  - [fgsm, cw, bim, mim, pgd]

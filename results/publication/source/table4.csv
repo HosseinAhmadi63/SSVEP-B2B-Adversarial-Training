@@ -1,0 +1,41 @@
+dataset,metric,attack_count,least_effective_attack,least_effective_value,most_effective_attack,most_effective_value
+Nakanishi2015,accuracy_annt,1,FGSM,0.91,PGD,0.86
+Nakanishi2015,accuracy_annt,2,FGSM + C&W,0.92,BIM + PGD,0.87
+Nakanishi2015,accuracy_annt,3,FGSM + C&W + BIM,0.89,C&W + BIM + PGD,0.84
+Nakanishi2015,accuracy_annt,4,FGSM + C&W + BIM + MIM,0.85,FGSM + BIM + MIM + PGD,0.83
+Nakanishi2015,auc_annt,1,FGSM,0.99,C&W,0.95
+Nakanishi2015,auc_annt,2,FGSM + BIM,0.99,C&W + PGD,0.95
+Nakanishi2015,auc_annt,3,FGSM + C&W + BIM,0.96,FGSM + C&W + PGD,0.93
+Nakanishi2015,auc_annt,4,FGSM + BIM + MIM + PGD,0.92,FGSM + C&W + BIM + MIM,0.91
+Nakanishi2015,accuracy_improvement,1,FGSM,0.03,PGD,0.08
+Nakanishi2015,accuracy_improvement,2,FGSM + PGD,0.08,C&W + MIM,0.09
+Nakanishi2015,accuracy_improvement,3,FGSM + C&W + MIM,0.10,FGSM + C&W + PGD,0.11
+Nakanishi2015,accuracy_improvement,4,FGSM + C&W + BIM + MIM,0.11,FGSM + C&W + MIM + PGD,0.13
+Nakanishi2015,auc_improvement,1,FGSM,0.03,MIM,0.05
+Nakanishi2015,auc_improvement,2,FGSM + BIM,0.06,FGSM + C&W,0.07
+Nakanishi2015,auc_improvement,3,FGSM + C&W + BIM,0.07,FGSM + C&W + PGD,0.11
+Nakanishi2015,auc_improvement,4,FGSM + C&W + BIM + MIM,0.09,FGSM + BIM + MIM + PGD,0.10
+Nakanishi2015,computational_time,1,FGSM,100.00,PGD,571.43
+Nakanishi2015,computational_time,2,FGSM + C&W,454.68,MIM + PGD,811.79
+Nakanishi2015,computational_time,3,FGSM + C&W + BIM,628.96,BIM + MIM + PGD,977.71
+Nakanishi2015,computational_time,4,FGSM + C&W + BIM + MIM,869.29,C&W + BIM + MIM + PGD,1105.36
+Lee2019_SSVEP,accuracy_annt,1,C&W,0.85,PGD,0.79
+Lee2019_SSVEP,accuracy_annt,2,FGSM + C&W,0.83,FGSM + MIM,0.78
+Lee2019_SSVEP,accuracy_annt,3,FGSM + C&W + BIM,0.81,FGSM + BIM + PGD,0.76
+Lee2019_SSVEP,accuracy_annt,4,FGSM + C&W + BIM + MIM,0.78,FGSM + BIM + MIM + PGD,0.75
+Lee2019_SSVEP,auc_annt,1,C&W,0.98,PGD,0.93
+Lee2019_SSVEP,auc_annt,2,FGSM + C&W,0.97,FGSM + BIM,0.94
+Lee2019_SSVEP,auc_annt,3,FGSM + C&W + MIM,0.94,FGSM + BIM + PGD,0.91
+Lee2019_SSVEP,auc_annt,4,FGSM + C&W + BIM + MIM,0.94,C&W + BIM + MIM + PGD,0.88
+Lee2019_SSVEP,accuracy_improvement,1,FGSM,0.15,PGD,0.24
+Lee2019_SSVEP,accuracy_improvement,2,FGSM + C&W,0.21,C&W + MIM,0.25
+Lee2019_SSVEP,accuracy_improvement,3,FGSM + C&W + MIM,0.25,C&W + BIM + PGD,0.30
+Lee2019_SSVEP,accuracy_improvement,4,FGSM + C&W + BIM + MIM,0.30,C&W + BIM + MIM + PGD,0.43
+Lee2019_SSVEP,auc_improvement,1,FGSM,0.28,PGD,0.36
+Lee2019_SSVEP,auc_improvement,2,FGSM + C&W,0.33,FGSM + BIM,0.39
+Lee2019_SSVEP,auc_improvement,3,FGSM + C&W + MIM,0.35,FGSM + BIM + PGD,0.43
+Lee2019_SSVEP,auc_improvement,4,FGSM + C&W + BIM + MIM,0.36,C&W + BIM + MIM + PGD,0.45
+Lee2019_SSVEP,computational_time,1,FGSM,454.68,PGD,1147.68
+Lee2019_SSVEP,computational_time,2,FGSM + C&W,798.75,MIM + PGD,1857.86
+Lee2019_SSVEP,computational_time,3,FGSM + C&W + BIM,1321.07,BIM + MIM + PGD,2397.82
+Lee2019_SSVEP,computational_time,4,FGSM + C&W + BIM + MIM,2039.29,C&W + BIM + MIM + PGD,2736.79

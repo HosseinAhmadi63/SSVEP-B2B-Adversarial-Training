@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: If you use this software, its outputs, or its methodology, please cite the IEEE Access article below.
+title: SSVEP B2B Adversarial Training
+type: software
+version: "1.0.0"
+date-released: "2026-09-08"
+license: MIT
+authors:
+  - family-names: Ahmadi
+    given-names: Hossein
+    orcid: https://orcid.org/0000-0002-3650-0280
+  - family-names: Kuhestani
+    given-names: Ali
+    orcid: https://orcid.org/0000-0003-0725-3230
+  - family-names: Keshavarzi
+    given-names: Mohammadreza
+  - family-names: Mesin
+    given-names: Luca
+    orcid: https://orcid.org/0000-0002-8239-2348
+repository-code: https://github.com/HosseinAhmadi63/SSVEP-B2B-Adversarial-Training
+preferred-citation:
+  type: article
+  title: Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG
+  authors:
+    - family-names: Ahmadi
+      given-names: Hossein
+      orcid: https://orcid.org/0000-0002-3650-0280
+    - family-names: Kuhestani
+      given-names: Ali
+      orcid: https://orcid.org/0000-0003-0725-3230
+    - family-names: Keshavarzi
+      given-names: Mohammadreza
+    - family-names: Mesin
+      given-names: Luca
+      orcid: https://orcid.org/0000-0002-8239-2348
+  journal: IEEE Access
+  volume: 13
+  year: 2025
+  start: 14358
+  end: 14378
+  doi: 10.1109/ACCESS.2025.3528770
+  url: https://doi.org/10.1109/ACCESS.2025.3528770
+  license: CC-BY-4.0
