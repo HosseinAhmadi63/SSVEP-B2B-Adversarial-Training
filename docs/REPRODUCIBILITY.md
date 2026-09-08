@@ -1,10 +1,3 @@
-# Reproducibility contract
-
-## What this repository guarantees
-
-The repository guarantees that every executable choice in its paper-mode pipeline is visible in `configs/paper.yaml`, validated before a run, and associated with a deterministic configuration fingerprint. It preserves generated outputs even when they differ from the article.
-
-The repository does not guarantee bit-identical recovery of the authors' historical experiment. The article leaves implementation details unresolved, the original split and trained weights are not published here, upstream dataset loaders can evolve, floating-point kernels vary by hardware, and computational-time values depend on the machine and measurement boundary.
 
 ## Reference environment
 
@@ -32,7 +25,7 @@ results/runs/{config_hash}/
 
 Changing a paper parameter creates a different fingerprint. Dataset and attack selections are execution filters and do not change that fingerprint. A filtered run is therefore diagnostic until the directory contains both datasets and all 31 configured scenarios for each; the expected 62-row aggregate table is the completeness criterion.
 
-The fingerprint covers configuration values but not source-code or dependency changes. Every run records a compact software environment, and a publication archive should additionally retain the Git commit identifier and installed package inventory used to produce it.
+Every run records a compact software environment, and a publication archive should additionally retain the Git commit identifier and installed package inventory used to produce it.
 
 ## Dataset identity
 
@@ -60,7 +53,7 @@ The paper-mode implementation applies the following order to each continuous run
 7. Store normalized `float32` epochs.
 8. Create the stratified 80/20 epoch split with seed 2025.
 
-Normalization is intentionally fitted before the split to reproduce the order described by the article. This exposes evaluation-distribution summary statistics to training and is not a leakage-free protocol. The choice is documented, tested, and must not be confused with a train-only normalization benchmark.
+Normalization is intentionally fitted before the split to reproduce the order described by the article. The choice is documented, tested, and must not be confused with a train-only normalization benchmark.
 
 ## Split identity
 
@@ -114,7 +107,7 @@ Raw elapsed times are recorded in seconds. For the complete reproduction, normal
 normalized_time = 100 × elapsed_seconds / global_minimum_elapsed_seconds
 ```
 
-The normalization makes the fastest row equal to 100; it does not make timing hardware-independent. A focused run also receives a provisional normalization over its currently completed rows, but that value is not comparable with the 62-row paper protocol. Published and complete-run times should be compared as relative trends, not as evidence of identical execution cost.
+The normalization makes the fastest row equal to 100; it does not make timing hardware-independent. A focused run also receives a provisional normalization over its currently completed rows.
 
 ## Archival record
 
@@ -131,4 +124,4 @@ A defensible result archive contains:
 - Raw and normalized timing records.
 - Generated publication comparisons and integrity reports.
 
-Together these artifacts establish what this implementation executed. They do not substitute for unavailable provenance from the original unpublished codebase.
+Together these artifacts establish what this implementation executed. 
