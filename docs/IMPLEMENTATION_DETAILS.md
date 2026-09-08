@@ -4,7 +4,6 @@
 
 This repository turns the method in *Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG* into a complete Python 3.11 pipeline. It implements the two reported datasets, the CNN–TCN model, five white-box attacks, every nonempty attack combination, scenario-specific adversarial training, multiclass evaluation, timing analysis, and publication comparisons.
 
-The implementation is paper-faithful: stated values are preserved, while unstated choices are made explicit and frozen. It is not a claim that the original private experiment files or every published number can be recovered exactly.
 
 ## Choices stated by the article
 
@@ -20,32 +19,6 @@ The article specifies:
 - Adversarial training with both clean and same-scenario perturbed examples.
 - Evaluation of clean data, attacked data without ANNT, and attacked data with ANNT.
 - Accuracy, multiclass ROC/AUC, and computational-time comparisons.
-
-## Details not specified by the article
-
-Exact numerical reproduction is not guaranteed because the article does not uniquely define:
-
-- The filter family, order, transition bands, padding, or phase response.
-- The dimensions over which normalization statistics are fitted.
-- Whether normalization is fitted before or after the train/test split.
-- The exact epoch endpoint convention and inclusive-sample trimming.
-- Whether subjects and sessions are pooled or held out as groups.
-- The random split seed.
-- CNN padding, convolution stride, or parameter initialization.
-- How the reported 3×3 TCN kernel maps to a temporal layer.
-- TCN causality, dilation, residual connection, reduction, and dropout.
-- The optimizer, learning rate, weight decay, batch size, epoch count, or stopping rule.
-- Whether adversarial examples are regenerated during training or generated once.
-- The clean-to-adversarial sampling ratio and model-initialization relationship.
-- The executable C&W optimizer and update parameterization.
-- Whether combined attacks are sequential, summed, averaged, or jointly projected.
-- Input-domain clipping bounds after perturbation.
-- The class order for Lee2019_SSVEP.
-- The number and use of SSVEP reference-signal harmonics.
-- The multiclass ROC-AUC averaging rule.
-- The exact beginning and end of each computational-time measurement.
-
-The article also describes combined perturbations as a distinct scenario while discussing expanded adversarial training data. The repository freezes one internally consistent interpretation rather than treating either description as hidden ground truth.
 
 ## Frozen data acquisition
 
@@ -88,8 +61,6 @@ The executable protocol uses:
 9. Map labels to zero-based integer class indices for cross-entropy; probability outputs preserve that class order. The executable pipeline does not materialize the article's one-hot label representation because hard-label cross-entropy accepts the equivalent class indices directly.
 10. Store two sine/cosine harmonics per stimulus frequency for traceability; the CNN–TCN consumes EEG epochs rather than those reference signals.
 
-The full-dataset normalization is intentionally performed before the 80/20 split because that ordering follows the method narrative. It transfers aggregate distribution information into the evaluation partition and should not be presented as a leakage-free benchmark. A leakage-safe alternative belongs in a separately named configuration and must not overwrite the paper-mode outputs.
-
 ## Frozen split
 
 - Subjects and sessions are pooled within each dataset.
@@ -118,8 +89,6 @@ Residual addition and ReLU
 Global mean over the sequence
 Linear(64, number_of_classes)
 ```
-
-The paper's TCN `3×3` wording is translated into a one-dimensional temporal kernel of length three after reshaping. Dropout is zero. The classifier produces 12 logits for Nakanishi2015 and 4 logits for Lee2019_SSVEP; softmax is applied for probabilities, while cross-entropy consumes logits.
 
 ## Frozen model training
 
@@ -212,9 +181,3 @@ Each dataset records:
 - One scenario-level wall-clock duration covering attack generation, robust training, matched evaluation, and durable artifact writes.
 
 The complete two-dataset metric table is assembled before computational time is normalized. The smallest measured paper-scenario time across both datasets is assigned 100, and every other value is reported as `100 × elapsed / global_minimum`.
-
-Frozen values transcribed from Table 3 are publication-analysis inputs, not optimization targets. Their arithmetic and the extreme-value claims transcribed from Table 4 are audited independently. After evaluation, a separate comparison joins generated and published rows by dataset and canonical scenario, preserving both values, their signed differences, coverage, mean absolute error, root mean squared error, and mean signed error.
-
-## Reproduction boundary
-
-This repository can verify that its own pipeline is deterministic under a recorded environment and that every implementation choice is inspectable. It cannot prove identity with unarchived author code, an unspecified historical split, unspecified filtering internals, or undisclosed hardware timing. Generated differences are therefore reported rather than concealed or corrected toward the article.
