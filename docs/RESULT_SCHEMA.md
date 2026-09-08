@@ -247,7 +247,7 @@ The frozen source tables are evidence inputs. Experiment training, attack genera
 
 `derived_summary.csv` uses `dataset`, `attack_count`, `scenario_count`, `mean_accuracy_no_annt`, `mean_accuracy_annt`, `mean_accuracy_improvement_reported`, `mean_accuracy_improvement_recomputed`, `mean_auc_no_annt`, `mean_auc_annt`, `mean_auc_improvement_reported`, `mean_auc_improvement_recomputed`, `mean_computational_time_normalized`, `minimum_computational_time_normalized`, and `maximum_computational_time_normalized`. It contains attack-count groups 1 through 5 and an `all` group for each dataset.
 
-`publication_audit.json` records source validity and overall internal consistency; source paths and row, scenario, endpoint, and claim counts; Table 3 endpoint discrepancies; Table 4 value and extreme-selection discrepancies; the derived-summary records; the four audit artifact paths; and the three generated figure paths. A false consistency value is a reported audit outcome, not a command failure and not permission to modify the frozen transcription.
+`publication_audit.json` records source validity and overall internal consistency; source paths and row, scenario, endpoint, and claim counts; the derived-summary records; the four audit artifact paths; and the three generated figure paths. 
 
 Publication plotting writes `figure7_improvements.png`, `figure8_improvement_distributions.png`, and `figure9_computational_time.png` below `results/publication/generated/`.
 
