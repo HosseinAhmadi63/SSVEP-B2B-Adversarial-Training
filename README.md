@@ -1,6 +1,6 @@
 # SSVEP B2B Adversarial Training
 
-This repository is a paper-faithful executable reimplementation of:
+This repository is an executable reimplementation of:
 
 > **Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG**  
 > Hossein Ahmadi, Ali Kuhestani, Mohammadreza Keshavarzi, and Luca Mesin  
@@ -10,12 +10,6 @@ This repository is a paper-faithful executable reimplementation of:
 The pipeline downloads the two public SSVEP datasets used in the article, applies the stated common-average reference, 4–16 Hz filtering, normalization, and epoch construction, builds the reported CNN–TCN classifier, evaluates all 31 nonempty subsets of FGSM, BIM, Carlini–Wagner, MIM, and PGD, trains a separate adversarially robust model for every attack scenario, calculates accuracy and macro one-vs-rest ROC-AUC, reproduces the publication analysis from frozen source values, and generates paper-aligned figures and comparison tables.
 
 If you use this repository, its code, or its results, cite the article above. Machine-readable citation metadata are in [CITATION.cff](CITATION.cff).
-
-## Reimplementation status
-
-This is an executable, deterministic reconstruction of the method described in the article. Exact numerical reproduction cannot be guaranteed because the paper omits the filter family and phase response, normalization axes, data-split grouping and seed, several epoch-boundary details, CNN padding, the executable form of the TCN, initialization, optimizer and training hyperparameters, the adversarial-training schedule, the precise construction of combined attacks, the multiclass AUC convention, and timing boundaries. Dataset-loader and numerical-library versions can also affect samples and floating-point results.
-
-Every choice required to turn the paper into runnable code is frozen in [configs/paper.yaml](configs/paper.yaml) and explained in [docs/IMPLEMENTATION_DETAILS.md](docs/IMPLEMENTATION_DETAILS.md). The pipeline joins generated and transcribed values only after evaluation, reports their signed and aggregate errors, and never tunes models toward publication targets.
 
 ## Frozen pipeline
 
