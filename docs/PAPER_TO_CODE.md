@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document maps the method in *Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG* to the executable repository. It separates values stated in the article from deterministic choices added here where the article does not uniquely specify an implementation.
+This document maps the method in *Securing Brain-to-Brain Communication Channels Using Adversarial Training on SSVEP EEG* to the executable repository. 
 
 The primary paper-mode specification is `configs/paper.yaml`. The command below validates its fixed datasets, scenarios, attack values, and publication-source structure without downloading EEG data:
 
@@ -68,14 +68,6 @@ Nakanishi class indices follow `9.25, 11.25, 13.25, 9.75, 11.75, 13.75, 10.25, 1
 | PGD | epsilon 0.01, alpha 0.001, 50 iterations | Zero random start and per-step L-infinity projection |
 
 BIM and the frozen zero-start PGD have the same update equation. Both names remain because the article reports them as distinct attacks.
-
-## What is paper-stated and what is repository-defined
-
-The datasets, cohort dimensions, passband, 80/20 division, high-level CNN–TCN structure, five attacks and their reported numeric parameters, attack subsets, ANNT comparison, accuracy, ROC/AUC, and normalized-time presentation come from the article.
-
-The following are repository-defined deterministic choices needed to execute that description: MOABB/MNE loader versions; precise event bounds; FIR family, phase, and window; normalization axes and pre-split fitting; pooled stratification and seed; CNN padding; causal residual TCN interpretation; global-mean reduction; initialization; optimizer and all training hyperparameters; static 1:1 adversarial concatenation; fresh robust-model initialization; C&W optimizer details; independent delta summation; no combined projection or input clipping; macro one-vs-rest AUC; and timing boundaries.
-
-These choices are documented rather than inferred to be the authors' unpublished settings. The implementation therefore supports a transparent, paper-faithful experiment, but exact numerical recovery from the article alone cannot be guaranteed. See `docs/IMPLEMENTATION_DETAILS.md` for the full rationale and `docs/REPRODUCIBILITY.md` for the execution contract.
 
 ## Executable stages
 
